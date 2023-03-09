@@ -1,50 +1,15 @@
 const express = require('express');
 const app = express();
 
+var ninetyDaysInSeconds = 90 * 24 * 60 * 60;
 
+let helmet = require('helmet')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.use(helmet.hidePoweredBy({ setTo: ninetyDaysInSeconds }))
+app.use(helmet.frameguard({ action: 'Deny' }))
+app.use(helmet.xssFilter())
+app.use(helmet.ieNoOpen())
+app.use(helmet.hsts({ maxAge: ninetyDaysInSeconds, force: true }))
 
 
 module.exports = app;
